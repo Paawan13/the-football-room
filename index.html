@@ -123,10 +123,44 @@
   }
 
   .football-icon {
-    width: 48px;
-    height: 48px;
-    margin: 0 auto 16px;
-    opacity: 0.85;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+  }
+
+  @keyframes ball-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-18px); }
+  }
+
+  @keyframes ball-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .football-icon .ball-group {
+    animation: ball-bounce 2s ease-in-out infinite;
+    transform-origin: center;
+  }
+
+  .football-icon .ball-spin {
+    animation: ball-spin 4s linear infinite;
+    transform-origin: 40px 40px;
+  }
+
+  .ball-shadow {
+    animation: ball-shadow 2s ease-in-out infinite;
+  }
+
+  @keyframes ball-shadow {
+    0%, 100% { rx: 18; opacity: 0.15; }
+    50% { rx: 12; opacity: 0.08; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .football-icon .ball-group,
+    .football-icon .ball-spin,
+    .ball-shadow { animation: none; }
   }
 
   .glass-card {
@@ -271,13 +305,22 @@
 
 <div class="page">
   <div class="hero">
-    <svg class="football-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="24" cy="24" r="22" stroke="var(--text)" stroke-width="2" fill="none" opacity="0.15"/>
-      <circle cx="24" cy="24" r="22" stroke="var(--accent)" stroke-width="2" fill="none" stroke-dasharray="6 4"/>
-      <path d="M24 2C24 2 30 12 30 24C30 36 24 46 24 46" stroke="var(--accent)" stroke-width="1.5" opacity="0.4"/>
-      <path d="M24 2C24 2 18 12 18 24C18 36 24 46 24 46" stroke="var(--accent)" stroke-width="1.5" opacity="0.4"/>
-      <line x1="2" y1="24" x2="46" y2="24" stroke="var(--accent)" stroke-width="1.5" opacity="0.4"/>
-      <circle cx="24" cy="24" r="6" fill="var(--accent)" opacity="0.15"/>
+    <svg class="football-icon" viewBox="0 0 80 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse class="ball-shadow" cx="40" cy="82" rx="18" ry="4" fill="var(--text)" opacity="0.15"/>
+      <g class="ball-group">
+        <g class="ball-spin">
+          <circle cx="40" cy="40" r="26" fill="var(--bg)" stroke="var(--text)" stroke-width="2" opacity="0.9"/>
+          <path d="M40 14 L47 27 L60 30 L53 43 L56 57 L43 53 L40 66 L37 53 L24 57 L27 43 L20 30 L33 27 Z" fill="var(--accent)" opacity="0.2" stroke="var(--accent)" stroke-width="1"/>
+          <polygon points="40,27 46,35 40,40 34,35" fill="var(--accent)" opacity="0.6"/>
+          <polygon points="50,34 55,43 48,44 46,35" fill="var(--accent)" opacity="0.5"/>
+          <polygon points="30,34 34,35 32,44 25,43" fill="var(--accent)" opacity="0.5"/>
+          <polygon points="35,48 40,46 45,48 43,55 37,55" fill="var(--accent)" opacity="0.5"/>
+          <path d="M14 40 Q27 38 33 27" stroke="var(--text)" stroke-width="0.8" fill="none" opacity="0.2"/>
+          <path d="M66 40 Q53 38 47 27" stroke="var(--text)" stroke-width="0.8" fill="none" opacity="0.2"/>
+          <path d="M26 60 Q32 50 40 46" stroke="var(--text)" stroke-width="0.8" fill="none" opacity="0.2"/>
+          <path d="M54 60 Q48 50 40 46" stroke="var(--text)" stroke-width="0.8" fill="none" opacity="0.2"/>
+        </g>
+      </g>
     </svg>
     <div class="badge">New Delhi</div>
     <h1>The Football<br><span>Room</span></h1>
